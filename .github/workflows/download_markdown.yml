@@ -2,10 +2,9 @@ name: Download Markdown Artifact
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Generate Markdown"]  # Specify the name of the first workflow
+  repository_dispatch:
     types:
-      - completed
+      - trigger-second-repo
 
 jobs:
   download_artifact:
