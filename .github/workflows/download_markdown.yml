@@ -1,0 +1,23 @@
+name: Download Markdown Artifact
+
+on:
+  workflow_run:
+    workflows: ["Generate Markdown"]  # Specify the name of the first workflow
+    types:
+      - completed
+
+jobs:
+  download_artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: markdown-artifact  # Specify the name of the artifact
+          path: .github  # Specify the directory to download the artifact
+
+      # You can add additional steps here to process or use the downloaded artifact
