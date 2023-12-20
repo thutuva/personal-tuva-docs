@@ -17,6 +17,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
+          repository: thutuva/personal-tuva-test
           name: markdown-artifact  # Specify the name of the artifact
           path: .github  # Specify the directory to download the artifact
 
