@@ -16,5 +16,6 @@ jobs:
 
       - name: Download artifact
         run: |
+          mkdir -p $GITHUB_WORKSPACE/.github
           curl -o .github/output.md -H "Authorization: Bearer ${{ secrets.GENERATE_MARKDOWN_TOKEN }}" \
           -L https://api.github.com/repos/thutuva/personal-tuva-test/actions/artifacts/mardown-artifact/zip
