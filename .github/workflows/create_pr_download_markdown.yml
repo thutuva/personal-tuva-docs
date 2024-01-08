@@ -25,6 +25,9 @@ jobs:
           repo: thutuva/personal-tuva-test
           github_token: ${{ secrets.GENERATE_MARKDOWN_TOKEN }}
 
+      - name: List contents of the downloaded artifact directory
+        run: ls -alh markdown-artifact/
+        
       - name: Configure Git
         run: |
           git config user.name "thutuva"
