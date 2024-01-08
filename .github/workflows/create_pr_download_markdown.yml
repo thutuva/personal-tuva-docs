@@ -3,7 +3,6 @@ name: Create Pull Request with Markdown
 on:
   workflow_run:
     workflows: ["Generate Markdown"]
-    branches: [main]
     types:
       - completed
     repositories:
