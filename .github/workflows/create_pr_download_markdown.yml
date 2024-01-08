@@ -23,7 +23,7 @@ jobs:
           workflow: generate_markdown.yml
           name: markdown-artifact
           repo: thutuva/personal-tuva-test
-          github_token: ${{ secrets.GENERATE_MARKDOWN_TOKEN }}
+          token: ${{ secrets.GENERATE_MARKDOWN_TOKEN }}
 
       - name: List contents of the downloaded artifact directory
         run: ls -alh markdown-artifact/
