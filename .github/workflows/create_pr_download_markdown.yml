@@ -25,9 +25,6 @@ jobs:
           repo: thutuva/personal-tuva-test
           token: ${{ secrets.GENERATE_MARKDOWN_TOKEN }}
 
-      - name: List contents of the downloaded artifact directory
-        run: ls -alh markdown-artifact/
-        
       - name: Configure Git
         run: |
           git config user.name "thutuva"
@@ -35,9 +32,6 @@ jobs:
 
       - name: Create New Branch
         run: git checkout -b new-markdown-update
-
-      - name: Add Markdown File
-        run: mv markdown-artifact/*.md .
 
       - name: Commit and Push
         run: |
