@@ -30,16 +30,14 @@ jobs:
           git config user.name "thutuva"
           git config user.email "thuxuan@tuvahealth.com"
 
-      - name: Create Unique Branch
-        run: |
-          UNIQUE_BRANCH="update-$(date +'%Y%m%d%H%M%S')"
-          git checkout -b $UNIQUE_BRANCH
 
       - name: Commit and Push
         run: |
+          UNIQUE_BRANCH="update-$(date +'%Y%m%d%H%M%S')"
+          git checkout -b $UNIQUE_BRANCH
           git add output.md
           git commit -m "Add updated markdown file"
-          git push --set-upstream origin ${{ env.UNIQUE_BRANCH }}
+          git push --set-upstream origin $UNIQUE_BRANCH
 
 
       - name: Create Pull Request
