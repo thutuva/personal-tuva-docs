@@ -30,15 +30,16 @@ jobs:
           git config user.name "thutuva"
           git config user.email "thuxuan@tuvahealth.com"
 
-      - name: Create New Branch
-        run: git checkout -b new-markdown-update
+      - name: Create Unique Branch
+        run: |
+          UNIQUE_BRANCH="update-$(date +'%Y%m%d%H%M%S')"
+          git checkout -b $UNIQUE_BRANCH
 
       - name: Commit and Push
         run: |
           git add output.md
           git commit -m "Add updated markdown file"
-          git pull origin new-markdown-update --rebase
-          git push origin new-markdown-update
+          git push origin $UNIQUE_BRANCH
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
