@@ -34,11 +34,11 @@ jobs:
       - name: Commit and Push
         run: |
           UNIQUE_BRANCH="update-$(date +'%Y%m%d%H%M%S')"
+          echo "UNIQUE_BRANCH=$UNIQUE_BRANCH" >> $GITHUB_ENV
           git checkout -b $UNIQUE_BRANCH
           git add output.md
           git commit -m "Add updated markdown file"
           git push --set-upstream origin $UNIQUE_BRANCH
-
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -47,5 +47,7 @@ jobs:
           commit-message: "Add updated markdown file"
           title: "Update Markdown File"
           body: "This PR updates the markdown file."
-          branch: $UNIQUE_BRANCH
-          base: main  # Base branch in second repo
+          branch: ${{ env.UNIQUE_BRANCH }}
+          base: main 
+
+
