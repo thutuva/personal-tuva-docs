@@ -34,7 +34,7 @@ jobs:
         run: git checkout -b new-markdown-update
 
       - name: Add Markdown File
-        run: mv markdown-file/output.md .
+        run: mv markdown-artifact/*.md .
 
       - name: Commit and Push
         run: |
