@@ -1,0 +1,56 @@
+name: Create Pull Request with Markdown
+
+on:
+  workflow_run:
+    workflows: ["generate_markdown"]
+    branches: [main]
+    types:
+      - completed
+    repositories:
+      - thutuva/personal-tuva-test
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Important for PR creation
+
+      - name: Download Artifact from First Repository
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: generate_markdown.yml
+          name: markdown-artifact
+          repo: thutuva/personal-tuva-test
+          token: ${{ secrets.GENERATE_MARKDOWN_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "thutuva"
+          git config user.email "thuxuan@tuvahealth.com"
+
+      - name: Create New Branch
+        run: git checkout -b new-markdown-update
+
+      - name: Add Markdown File
+        run: mv markdown-file/output.md .
+
+      - name: Commit and Push
+        run: |
+          git add output.md
+          git commit -m "Add updated markdown file"
+          git push origin new-markdown-update
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GENERATE_MARKDOWN_TOKEN }}
+          commit-message: "Add updated markdown file"
+          title: "Update Markdown File"
+          body: "This PR updates the markdown file."
+          branch: new-markdown-update
+          base: main  # Base branch in second repo
