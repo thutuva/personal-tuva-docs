@@ -39,7 +39,8 @@ jobs:
         run: |
           git add output.md
           git commit -m "Add updated markdown file"
-          git push origin $UNIQUE_BRANCH
+          git push --set-upstream origin ${{ env.UNIQUE_BRANCH }}
+
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
