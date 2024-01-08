@@ -47,5 +47,5 @@ jobs:
           commit-message: "Add updated markdown file"
           title: "Update Markdown File"
           body: "This PR updates the markdown file."
-          branch: new-markdown-update
+          branch: $UNIQUE_BRANCH
           base: main  # Base branch in second repo
