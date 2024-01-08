@@ -37,6 +37,7 @@ jobs:
         run: |
           git add output.md
           git commit -m "Add updated markdown file"
+          git pull origin new-markdown-update --rebase
           git push origin new-markdown-update
 
       - name: Create Pull Request
